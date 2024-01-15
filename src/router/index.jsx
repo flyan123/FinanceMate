@@ -2,7 +2,7 @@
 import React,{lazy} from "react";
 // Navigate重定向组件
 import { Navigate } from "react-router-dom";
-
+import Loginto from "../pages/Login";
 const Home =lazy(()=>import("../pages/Home"))
 const Part1 =lazy(()=>import("../pages/Part/part1"))
 const Part2 =lazy(()=>import("../pages/Part/part2"))
@@ -60,7 +60,11 @@ const routes = [
     {
         path:'*',
         element:<Navigate to='/part1' />
-    }
+    },
+    {
+        path:'/loginto',
+        element:<Loginto/>
+    },
 ]
 
 export default routes
