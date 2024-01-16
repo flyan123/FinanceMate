@@ -5,52 +5,52 @@ import { useState } from 'react';
 import {
     DesktopOutlined,
     FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
+    VideoCameraAddOutlined,
+    ToolOutlined,
     UserOutlined,
 } from '@ant-design/icons';
 
 // 登录请求到数据之后，就可以跟items这个数组进行匹配
 const items = [
     {
-        label: '栏目1',
+        label: '数据显示',
         key: '/part1',
-        icon: <PieChartOutlined />
-    }, {
-        label: '栏目2',
-        key: '/part2',
         icon: <DesktopOutlined />
     }, {
-        label: '栏目3',
+        label: '用户管理',
+        key: '/part2',
+        icon: <UserOutlined />
+    }, {
+        label: '内容管理',
         key: 'part3',
-        icon: <UserOutlined />,
+        icon: <VideoCameraAddOutlined />,
         children: [
             {
-                label: '栏目301',
+                label: '电影管理',
                 key: '/part3/part301',
             }, {
-                label: '栏目302',
+                label: '影院管理',
                 key: '/part3/part302',
             }, {
-                label: '栏目303',
+                label: '影厅管理',
                 key: '/part3/part303',
             },
         ]
     }, {
-        label: '栏目4',
+        label: '其余管理',
         key: 'part4',
-        icon: <TeamOutlined />,
+        icon: <ToolOutlined />,
         children: [
             {
-                label: '栏目401',
+                label: '评论管理',
                 key: '/part4/part401',
             }, {
-                label: '栏目402',
+                label: '订单管理',
                 key: '/part4/part402',
             }
         ]
     }, {
-        label: '栏目5',
+        label: '电影排片',
         key: '/part5',
         icon: <FileOutlined />
     }
