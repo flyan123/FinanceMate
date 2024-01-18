@@ -1,5 +1,6 @@
 import React from "react";
 import part1style from './part1.module.less'
+import DemoPie from '../../components/Pie/indext'
 
 const Part1 = () => {
     return(
@@ -40,7 +41,7 @@ const Part1 = () => {
                     <h5>用户性别比例</h5>
                     {/* 图表 */}
                     <div className={part1style.rose}>
-
+                        <DemoPie/>
                     </div>
                 </div>
 
