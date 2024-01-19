@@ -65,7 +65,8 @@ const App = () => {
             lineHeight: '48px'
           }}
         >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          ©电影院后台管理系统
+          {/* Ant Design ©{new Date().getFullYear()} Created by Ant UED */}
         </Footer>
       </Layout>
     </Layout>

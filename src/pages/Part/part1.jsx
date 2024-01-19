@@ -1,6 +1,7 @@
 import React from "react";
 import part1style from './part1.module.less'
 import DemoPie from '../../components/Pie/indext'
+import DemoColumn from '../../components/Bar/index'
 
 const Part1 = () => {
     return(
@@ -50,7 +51,7 @@ const Part1 = () => {
                     <h5>电影票类型分布</h5>
                     {/* 图表 */}
                     <div className={part1style.rose}>
-
+                        <DemoColumn />
                     </div>
                 </div>
 
