@@ -20,7 +20,7 @@ const Part2 = () => {
                             }}
                         />
                     </Space>
-                    <button className="searchbut">添加用户</button>
+                    <button className="searchbut">添加用 户</button>
                 
 
             </div>
