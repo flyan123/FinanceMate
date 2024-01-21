@@ -6,13 +6,32 @@
 .all{
     margin: 20px;
 
-    .searchbut{
-        float: right;
-        background-color: skyblue;
-        color: white;
-        padding: 5px 5px;
-        border-radius: 0.5em;
-        margin-left: 10px;
+    .searchbox{
+        position: relative;
 
+        .searchbut{
+            display: flex;
+            position: absolute;
+            left: 40%;
+            top: 0px;
+        }
+    }
+    .tables{
+        margin-top: 56px;
+        table {
+            // 边框间距设置为0
+            border-spacing: 0; 
+            text-align: center;  
+            
+        }
+        tr{
+            height: 57px;
+        }
+        th{
+            width: 200px;
+        }
+        button{
+            margin-right: 10px;
+        }
     }
 }
