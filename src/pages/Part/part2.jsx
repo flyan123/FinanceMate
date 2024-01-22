@@ -35,7 +35,8 @@ const Part2 = () => {
             <div className={part2style.tables} >
                 <table border="1" >
                     <thead>
-                        <tr>
+                        <tr style={{height:'35px'}}>
+                            <th style={{width:'25px'}}>  </th>
                             <th>头像</th>
                             <th>账号</th>
                             <th>用户名</th>
@@ -47,6 +48,7 @@ const Part2 = () => {
                     </thead>
                     <tbody>
                         <tr>
+                            <td >1</td>
                             <td><button>更新图片</button></td>
                             <td>231321</td>
                             <td>测试用户1</td>
@@ -59,6 +61,7 @@ const Part2 = () => {
                             </td>
                         </tr>
                         <tr>
+                            <td>2</td>
                             <td><button>更新图片</button></td>
                             <td>231321</td>
                             <td>测试用户1</td>
@@ -71,6 +74,7 @@ const Part2 = () => {
                             </td>
                         </tr>
                         <tr>
+                            <td >3</td>
                             <td><button>更新图片</button></td>
                             <td>231321</td>
                             <td>测试用户1</td>
