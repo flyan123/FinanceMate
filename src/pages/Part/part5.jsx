@@ -4,7 +4,7 @@ import part5style from './part5.module.less'
 import { Button, Flex } from 'antd';
 
 import { Input, Space } from 'antd';
-import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
+import { DeleteTwoTone } from '@ant-design/icons';
 
 const { Search } = Input;
 
@@ -18,7 +18,7 @@ const Part5 =()=>{
 
                 <Space direction="vertical">
                     <Search
-                        placeholder="请输入账号进行查询"
+                        placeholder="请输入内容"
                         onSearch={onSearch}
                         style={{
                             width: 500,
@@ -27,7 +27,7 @@ const Part5 =()=>{
                 </Space>
                 <div className={part5style.searchbut}>
                     <Flex gap="small" wrap="wrap" >
-                        <Button type="primary">添加用户</Button>
+                        <Button type="primary">电影排片</Button>
 
                     </Flex>
                 </div>
@@ -37,49 +37,50 @@ const Part5 =()=>{
                 <table border="1" >
                     <thead>
                         <tr>
-                            <th>头像</th>
-                            <th>账号</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>生日</th>
-                            <th>电话</th>
+                            <th style={{width:'50px'}}> </th>
+                            <th>电影名</th>
+                            <th>影院名</th>
+                            <th>放映厅</th>
+                            <th>放映日期</th>
+                            <th>放映时间</th>
+                            <th>售价(元)</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>1</td>
+                            <td>我不是药神</td>
+                            <td>中影4KMAX国际影城(西丽店)</td>
+                            <td>1号厅</td>
+                            <td>2021-05-14</td>
+                            <td>09:30 </td>
+                            <td>33 </td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>2</td>
+                            <td>升起的烟花，从下面看?还是从侧面看?</td>
+                            <td>中影4KMAX国际影城(西丽店)</td>
+                            <td>1号厅</td>
+                            <td>2021-05-07</td>
+                            <td>20：20</td>
+                            <td>20</td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>3</td>
+                            <td>复仇者联盟4:终局之战</td>
+                            <td>中影4KMAX国际影城(西丽店)</td>
+                            <td>1号厅</td>
+                            <td>2021-05-01</td>
+                            <td>16:30</td>
+                            <td>44</td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
@@ -91,7 +92,6 @@ const Part5 =()=>{
 
         </div>
 
-    )
        </div>
    )
 }

@@ -1,10 +1,9 @@
 import React from "react"
 import part401style from './part401.module.less'
 
-import { Button, Flex } from 'antd';
 
 import { Input, Space } from 'antd';
-import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
+import { DeleteTwoTone } from '@ant-design/icons';
 
 const { Search } = Input;
 
@@ -18,68 +17,60 @@ const Part401 =()=>{
 
                 <Space direction="vertical">
                     <Search
-                        placeholder="请输入账号进行查询"
+                        placeholder="请输入内容"
                         onSearch={onSearch}
                         style={{
                             width: 500,
                         }}
                     />
                 </Space>
-                <div className={part401style.searchbut}>
-                    <Flex gap="small" wrap="wrap" >
-                        <Button type="primary">添加用户</Button>
-
-                    </Flex>
-                </div>
+               
             </div>
             {/* 表格 */}
             <div className={part401style.tables} >
                 <table border="1" >
                     <thead>
                         <tr>
-                            <th>头像</th>
-                            <th>账号</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>生日</th>
-                            <th>电话</th>
+                            <th style={{width:'50px'}}> </th>
+                            <th style={{width:'150px'}}>用户名</th>
+                            <th>电影名</th>
+                            <th>评论时间</th>
+                            <th>用户评分</th>
+                            <th  style={{width:'150px'}}>评论内容</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
+                            <td>1</td>
                             <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>天气之子</td>
+                            <td>2021-03-31 16:10:38</td>
+                            <td>10</td>
+                            <td>好看!</td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>2</td>
+                            <td>测试用户2</td>
+                            <td>Hello Wrold</td>
+                            <td>2021-03-14 0244:10</td>
+                            <td>9</td>
+                            <td>good!</td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
+                            <td>3</td>
+                            <td>测试用户3</td>
+                            <td>Hello Wrold</td>
+                            <td>2021-03-14 02:40:36</td>
+                            <td>10</td>
+                            <td>好看!</td>
                             <td>
-                                <button><EditTwoTone /></button>
                                 <button><DeleteTwoTone /></button>
                             </td>
                         </tr>
@@ -91,7 +82,7 @@ const Part401 =()=>{
 
         </div>
 
-    )
+    
        </div>
    )
 }
