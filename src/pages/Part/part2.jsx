@@ -1,289 +1,192 @@
-import React, { useState } from "react";
-import part2style from './part2.module.less'
-import { Button, Flex } from 'antd';
-
-import { Input, Space } from 'antd';
-import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
-const { Search } = Input;
-
-const onSearch = (value, _e, info) => console.log(info?.source, value);
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Form, Input, Popconfirm, Table } from 'antd';
 
 
-
-
-let nextId = 3;
-
-const initialTodos = [
-    { id: 0,num:'1', Account: '231321', User: '测试用户1', Gender: '男', Birthday: '2001.2.1', PNum: '1245456456', done: true },
-    { id: 1,num:'2', Account: '231321', User: '测试用户1', Gender: '男', Birthday: '2001.2.1', PNum: '1245456456', done: false },
-    { id: 2,num:'3', Account: '231321', User: '测试用户1', Gender: '男', Birthday: '2001.2.1', PNum: '1245456456', done: false },
-];
-
-// let intotext = { id: 0, Account: '231321', User: '测试用户1', Gender: '男', Birthday: '2001.2.1', PNum: '1245456456', done: true }
-
-// 2222
-function TaskList({
-    todos,
-    onChangeTodo,
-    onDeleteTodo
-}) {
+const EditableContext = React.createContext(null);
+const EditableRow = ({ index, ...props }) => {
+    const [form] = Form.useForm();
     return (
-        <table border='1'>
-            {todos.map(todo => (
-                <tr key={todo.id} style={{ height: '35px' }}>
-                    
-                    <Task
-                        todo={todo}
-                        onChange={onChangeTodo}
-                        onDelete={onDeleteTodo}
-                    />
-                </tr>
-            ))}
-        </table>
+        <Form form={form} component={false}>
+            <EditableContext.Provider value={form}>
+                <tr {...props} />
+            </EditableContext.Provider>
+        </Form>
     );
-}
-
-function Task({ todo, onChange, onDelete }) {
-    const [isEditing, setIsEditing] = useState(false);
-    let todoContent;
-    if (isEditing) {
-        todoContent = (
-            <>
-
-                  
-                <td>
-                    <input value={todo.num} onChange={e => { onChange({ ...todo, num: e.target.value }); }} />
-                </td>
-                <td>
-                    <input value={todo.Account} onChange={e => { onChange({ ...todo, Account: e.target.value }); }} />
-                </td>
-                <td>
-                    <input value={todo.User} onChange={e => { onChange({ ...todo, User: e.target.value }); }} />
-                </td>
-                <td>
-                    <input value={todo.Gender} onChange={e => { onChange({ ...todo, Gender: e.target.value }); }} />
-                </td>
-                <td>
-                    <input value={todo.Birthday} onChange={e => { onChange({ ...todo, Birthday: e.target.value }); }} />
-                </td>
-                <td>
-                    <input value={todo.PNum} onChange={e => { onChange({ ...todo, PNum: e.target.value }); }} />
-                </td>
-                <td>
-                    <button onClick={() => setIsEditing(false)}><EditTwoTone /></button>
-                    <button onClick={() => onDelete(todo.id)}><DeleteTwoTone /></button>
-                </td>
-
-                {/* <button onClick={() => setIsEditing(false)}>
-                    编辑
-                </button> */}
-               
-
-            </>
-        );
-    } else {
-        todoContent = (
-            <>
-     
-                   
-                <td>
-                    {todo.num}
-                </td>
-                <td>
-                    {todo.Account}
-                </td>
-
-                <td>
-                    {todo.User}
-                </td>
-
-                <td>
-                    {todo.Gender}
-                </td>
-                <td>
-                    {todo.Birthday}
-                </td>
-                <td>
-                    {todo.PNum}
-                </td>
-                <td>
-                    <button onClick={() => setIsEditing(true)}><EditTwoTone /></button>
-                    <button onClick={() => onDelete(todo.id)}><DeleteTwoTone /></button>
-                </td>
-
-
-              
-     
-            </>
+};
+const EditableCell = ({
+    title,
+    editable,
+    children,
+    dataIndex,
+    record,
+    handleSave,
+    ...restProps
+}) => {
+    const [editing, setEditing] = useState(false);
+    const inputRef = useRef(null);
+    const form = useContext(EditableContext);
+    useEffect(() => {
+        if (editing) {
+            inputRef.current.focus();
+        }
+    }, [editing]);
+    const toggleEdit = () => {
+        setEditing(!editing);
+        form.setFieldsValue({
+            [dataIndex]: record[dataIndex],
+        });
+    };
+    const save = async () => {
+        try {
+            const values = await form.validateFields();
+            toggleEdit();
+            handleSave({
+                ...record,
+                ...values,
+            });
+        } catch (errInfo) {
+            console.log('Save failed:', errInfo);
+        }
+    };
+    let childNode = children;
+    if (editable) {
+        childNode = editing ? (
+            <Form.Item
+                style={{
+                    margin: 0,
+                }}
+                name={dataIndex}
+                rules={[
+                    {
+                        required: true,
+                        message: `${title} is required.`,
+                    },
+                ]}
+            >
+                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+            </Form.Item>
+        ) : (
+            <div
+                className="editable-cell-value-wrap"
+                style={{
+                    paddingRight: 24,
+                }}
+                onClick={toggleEdit}
+            >
+                {children}
+            </div>
         );
     }
-    return (
-        <label>
-
-            {todoContent}
-            {/* <button onClick={() => onDelete(todo.id)}>
-                删除
-            </button> */}
-        </label>
-    );
-}
-
-
-
+    return <td {...restProps}>{childNode}</td>;
+};
 
 
 const Part2 = () => {
-
-    // 
-    // { id: 0, Account: '231321', User: '测试用户1', Gender: '男', Birthday: '2001.2.1', PNum: '1245456456', done: true },
-    // let nextId = 0;
-   
-
-    // 修改编辑函数
-
-    const [account, setAccount] = useState()
-    const [user, setUser] = useState()
-    const [age, setAge] = useState()
-    const [change, setChange] = useState(false)
-
-
-    // 333
-    const [todos, setTodos] = useState(
-        initialTodos
-    );
-
-    function handleAddTodo(num,Account,User,Gender,Birthday,PNum) {
-        setTodos([
-            ...todos,
-           
-            { 
-                id: nextId++,
-                num:num,
-                Account: Account,
-                User: User, 
-                Gender: Gender, 
-                Birthday:Birthday,
-                PNum: PNum,
-                done: false 
-             },
-
-        ]);
-    }
-
-    function handleChangeTodo(nextTodo) {
-        setTodos(todos.map(t => {
-            if (t.id === nextTodo.id) {
-                return nextTodo;
-            } else {
-                return t;
-            }
-        }));
-    }
-
-    function handleDeleteTodo(todoId) {
-        setTodos(
-            todos.filter(t => t.id !== todoId)
-        );
-    }
-
+    const [dataSource, setDataSource] = useState([
+        {
+            key: '0',
+            name: 'Edward King 0',
+            age: '32',
+            address: 'London, Park Lane no. 0',
+        },
+        {
+            key: '1',
+            name: 'Edward King 1',
+            age: '32',
+            address: 'London, Park Lane no. 1',
+        },
+    ]);
+    const [count, setCount] = useState(2);
+    const handleDelete = (key) => {
+        const newData = dataSource.filter((item) => item.key !== key);
+        setDataSource(newData);
+    };
+    const defaultColumns = [
+        {
+            title: 'name',
+            dataIndex: 'name',
+            width: '30%',
+            editable: true,
+        },
+        {
+            title: 'age',
+            dataIndex: 'age',
+        },
+        {
+            title: 'address',
+            dataIndex: 'address',
+        },
+        {
+            title: 'operation',
+            dataIndex: 'operation',
+            render: (_, record) =>
+                dataSource.length >= 1 ? (
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                        <a>Delete</a>
+                    </Popconfirm>
+                ) : null,
+        },
+    ];
+    const handleAdd = () => {
+        const newData = {
+            key: count,
+            name: `Edward King ${count}`,
+            age: '32',
+            address: `London, Park Lane no. ${count}`,
+        };
+        setDataSource([...dataSource, newData]);
+        setCount(count + 1);
+    };
+    const handleSave = (row) => {
+        const newData = [...dataSource];
+        const index = newData.findIndex((item) => row.key === item.key);
+        const item = newData[index];
+        newData.splice(index, 1, {
+            ...item,
+            ...row,
+        });
+        setDataSource(newData);
+    };
+    const components = {
+        body: {
+            row: EditableRow,
+            cell: EditableCell,
+        },
+    };
+    const columns = defaultColumns.map((col) => {
+        if (!col.editable) {
+            return col;
+        }
+        return {
+            ...col,
+            onCell: (record) => ({
+                record,
+                editable: col.editable,
+                dataIndex: col.dataIndex,
+                title: col.title,
+                handleSave,
+            }),
+        };
+    });
     return (
-
         <div>
-            <div className={part2style.all}>
-                <div className={part2style.searchbox}>
-
-                    <Space direction="vertical">
-                        <Search
-                            placeholder="请输入账号进行查询"
-                            onSearch={onSearch}
-                            style={{
-                                width: 500,
-                            }}
-                        // value={name}
-                        // onChange={e => setName(e.target.value)}
-                        />
-                    </Space>
-                    <div className={part2style.searchbut}>
-                        {/*  () => {
-                                    setArtists([
-                                        ...artists,
-                                        // 并在末尾添加了一个新的元素
-                                        { id: nextId++, name: name }
-                                    ]);
-                                } */}
-                        <Flex gap="small" wrap="wrap" >
-                            <Button type="primary"
-                                onClick={()=>handleAddTodo()}
-                                  
-                            >添加用户</Button>
-
-                        </Flex>
-                    </div>
-                </div>
-
-                {/* 表格 */}
-                <div className={part2style.tables} >
-                    <table border="1" >
-                        <thead>
-                            <tr style={{ height: '35px' }}>
-                                <th style={{ width: '25px' }}>  </th>
-                                <th>头像</th>
-                                <th>账号</th>
-                                <th>用户名</th>
-                                <th>性别</th>
-                                <th>生日</th>
-                                <th>电话</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td >1</td>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
-                            <td>
-                                <button><EditTwoTone /></button>
-                                <button><DeleteTwoTone /></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><button>更新图片</button></td>
-                            <td>231321</td>
-                            <td>测试用户1</td>
-                            <td>男</td>
-                            <td>2001.2.1</td>
-                            <td>1245456456</td>
-                            <td>
-                                <button ><EditTwoTone /></button>
-                                <button ><DeleteTwoTone /></button>
-                            </td>
-                        </tr>
-                        
-                        <TaskList
-                            todos={todos}
-                            onChangeTodo={handleChangeTodo}
-                            onDeleteTodo={handleDeleteTodo}
-                        />
-                    </table>
-                </div>
-
-
-            </div>
-
-            <div>
-                {/* {change?<input onChange={e=>setText(e.target.value)} />:text} */}
-                <br />
-                {change ? <input onChange={e => setAge(e.target.value)} style={{ width: '10px' }} /> : age}
-
-                {/* <button onClick={()=>setChange(!change)}>修改</button> */}
-            </div>
+            <Button
+                onClick={handleAdd}
+                type="primary"
+                style={{
+                    marginBottom: 16,
+                }}
+            >
+                Add a row
+            </Button>
+            <Table
+                components={components}
+                rowClassName={() => 'editable-row'}
+                bordered
+                dataSource={dataSource}
+                columns={columns}
+            />
         </div>
-
-    )
-}
-
-export default Part2
+    );
+};
+export default Part2;
