@@ -1,5 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Button, Form, Input, Popconfirm, Table } from 'antd';
+import React, {  useContext, useEffect, useRef, useState} from "react";
+import part2style from './part2.module.less'
+import { Button, Form, Input, Popconfirm,Space, Table,Flex } from 'antd';
+
+import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
+const { Search } = Input;
+
+const onSearch = (value, _e, info) => console.log(info?.source, value);
+
+
+
+
 
 
 const EditableContext = React.createContext(null);
@@ -80,7 +90,7 @@ const EditableCell = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-
+// Part2
 const Part2 = () => {
     const [dataSource, setDataSource] = useState([
         {
@@ -168,24 +178,45 @@ const Part2 = () => {
             }),
         };
     });
+
+    // return
+
     return (
-        <div>
-            <Button
-                onClick={handleAdd}
-                type="primary"
-                style={{
-                    marginBottom: 16,
-                }}
-            >
-                Add a row
-            </Button>
-            <Table
-                components={components}
-                rowClassName={() => 'editable-row'}
-                bordered
-                dataSource={dataSource}
-                columns={columns}
-            />
+        <div className={part2style.all}>
+             <div className={part2style.searchbox}>
+                <Space direction="vertical">
+                    <Search
+                        placeholder="请输入账号进行查询"
+                        onSearch={onSearch}
+                        style={{
+                            width: 500,
+                        }}
+                    // value={name}
+                    // onChange={e => setName(e.target.value)}
+                    />
+                </Space>
+                <Button
+                        onClick={handleAdd}
+                        type="primary"
+                        style={{
+                            marginBottom: 16,
+                            
+
+                        }}
+                    >
+                        添加用户
+                    </Button>
+                </div>
+                <div className={part2style.text2}>
+                    <Table
+                        components={components}
+                        rowClassName={() => 'editable-row'}
+                        bordered
+                        dataSource={dataSource}
+                        columns={columns}
+                    />
+                </div>
+       
         </div>
     );
 };
