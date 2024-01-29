@@ -62,7 +62,6 @@ const EditableCell = ({
                     margin: 0,
                 }}
                 name={dataIndex}
-                account={dataIndex}
                 rules={[
                     {
                         required: true,
@@ -92,23 +91,16 @@ const Part2 = () => {
     const [dataSource, setDataSource] = useState([
         {
             key: '0',
-            num: '0',
-            head:<button>更新图片</button>,
-            account: '2355',
-            name: '测试员0',
-            sex: '女',
-            birthday: "2001.10.11",
-            phone:'*********'
+            name: 'Edward King 0',
+            age: '32',
+            
+            address: 'London, Park Lane no. 0',
         },
         {
             key: '1',
-            num: '1',
-            head:<button>更新图片</button>,
-            account: '2355',
-            name: '测试员1',
-            sex: '男',
-            birthday: "2001.10.11",
-            phone:'*********'
+            name: 'Edward King 1',
+            age: '30',
+            address: 'London, Park Lane no. 1',
         },
     ]);
     const [count, setCount] = useState(2);
@@ -118,71 +110,36 @@ const Part2 = () => {
     };
     const defaultColumns = [
         {
-            title: ' ',
-            dataIndex: 'num',
-            width: '5%',
-            // editable: true,
-        },{
-            title: '头像',
-            dataIndex: 'head',
-            width: '10%',
-            // editable: true,
-        },{
-            title: '账号',
-            dataIndex: 'account',
-            width: '10%',
-            editable: true,
-        },{
-            title: '用户名',
+            title: 'name',
             dataIndex: 'name',
-            width: '15%',
+            width: '30%',
             editable: true,
         },
         {
-            title: '性别',
-            dataIndex: 'sex',
-            width: '10%',
-            editable: true,
-
+            title: 'age',
+            dataIndex: 'age',
         },
         {
-            title: '生日',
-            dataIndex: 'birthday',
-            width: '15%',
-            editable: true,
-
+            title: 'address',
+            dataIndex: 'address',
         },
         {
-            title: '电话',
-            dataIndex: 'phone',
-            width: '16%',
-            editable: true,
-
-        },
-        {
-            title: '操作',
+            title: 'operation',
             dataIndex: 'operation',
             render: (_, record) =>
                 dataSource.length >= 1 ? (
-                    <Popconfirm title="是否删除?" onConfirm={() => handleDelete(record.key)}>
-                        <a><DeleteTwoTone /></a>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                        <a>Delete</a>
                     </Popconfirm>
                 ) : null,
-                width: '40%',
-
         },
     ];
     const handleAdd = () => {
         const newData = {
             key: count,
-            num:`${count}`,
-            head:<button>更新照片</button>,
-            account:`2355`,
-            name: `测试员 ${count}`,
-            sex: '男',
-            birthday: "2001.10.11",
-            phone:'*********'
-            
+            name: `Edward King ${count}`,
+            age: '30',
+            address: `London, Park Lane no. ${count}`,
         };
         setDataSource([...dataSource, newData]);
         setCount(count + 1);
