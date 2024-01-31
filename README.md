@@ -70,7 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ### 登入注册依赖
-1. 路由：npm install --save react-router-dom
-2. 依赖：npm install --save redux
-3. npm install --save react-redux
+1. 路由：npm install --save react-router-dom √
+2. 依赖：npm install --save redux √
+3. npm install --save react-redux √
 3. npm install --save-dev redux-devtools-extension
