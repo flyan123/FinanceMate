@@ -36,7 +36,7 @@ const gotoLogin=()=>{
     return (
         <div className={logstyle.loginPage}>
             {/* 存放背景 */}
-            <canvas id="canvas" style={{ display: "block" }}></canvas>
+            <canvas id="canvas" style={{ display: "block", width:'1536px',height:'683px'}}></canvas>
             {/* 页面内容 */}
             <div className={logstyle.loginBox}>
                 {/* 标题部分 */}

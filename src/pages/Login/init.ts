@@ -16,7 +16,7 @@ export default function initLoginBg(){
   var canvas2 = document.createElement('canvas') ,
   ctx2 = canvas2.getContext('2d') as CanvasRenderingContext2D;
   canvas2.width = 100;
-  canvas2.height = 100;
+  canvas2.height = 80;
   var half = canvas2.width / 2,
   gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
   gradient2.addColorStop(0.025, '#CCC');

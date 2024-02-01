@@ -29,7 +29,7 @@ const App = () => {
       {/* 右边侧边栏 */}
       <Layout>
 
-        {/* 右边侧边栏头部
+        {/* 右边侧边栏头部 */}
         <Header
           style={{
             paddingLeft: "16px",
@@ -41,7 +41,7 @@ const App = () => {
           <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           
-        </Header> */}
+        </Header>
 
         {/* 右边侧边栏内容 */}
         <Content
