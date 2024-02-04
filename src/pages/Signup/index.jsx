@@ -1,51 +1,18 @@
 import React, { useState } from 'react';
 import {
-  AutoComplete,
   Button,
-  Cascader,
   Checkbox,
   Col,
   Form,
   Input,
-  InputNumber,
   Row,
   Select,
 } from 'antd';
+
+import signupstyle from './sig.module.less'
+
 const { Option } = Select;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -95,271 +62,175 @@ const Signup = () => {
       </Select>
     </Form.Item>
   );
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-    }
-  };
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
 
 
   return (
 
-    <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
-      style={{
-        maxWidth: 600,
-      }}
-      scrollToFirstError
-    >
+    <div className={signupstyle.all}>
 
- {/* email */}
-
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          residence: ['zhejiang', 'hangzhou', 'xihu'],
+          prefix: '86',
+        }}
+        style={{
+          maxWidth: 700,
+        }}
+        scrollToFirstError
       >
-        <Input />
-      </Form.Item>
+        {/* 1 */}
+        <h1>新用户注册</h1>
 
- {/* password */}
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
-
-{/* password again */}
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
+        {/* 2. 用户名 */}
+        <Form.Item
+          name="nickname"
+          label="用户名"
+          tooltip="你希望别人怎么称呼你?"
+          rules={[
+            {
+              required: true,
+              message: '请输入您的昵称!',
+              whitespace: true,
             },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-{/* Nickname */}
-      <Form.Item
-        name="nickname"
-        label="Nickname"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your nickname!',
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-{/* residence */}
-      <Form.Item
-        name="residence"
-        label="Habitual Residence"
-        rules={[
-          {
-            type: 'array',
-            required: true,
-            message: 'Please select your habitual residence!',
-          },
-        ]}
-      >
-        <Cascader options={residences} />
-      </Form.Item>
-
-{/* phone */}
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your phone number!',
-          },
-        ]}
-      >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
-
-
-{/* donation */}
-      <Form.Item
-        name="donation"
-        label="Donation"
-        rules={[
-          {
-            required: true,
-            message: 'Please input donation amount!',
-          },
-        ]}
-      >
-        <InputNumber
-          addonAfter={suffixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
-
-{/* website */}
-      <Form.Item
-        name="website"
-        label="Website"
-        rules={[
-          {
-            required: true,
-            message: 'Please input website!',
-          },
-        ]}
-      >
-        <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
+          ]}
+        >
           <Input />
-        </AutoComplete>
-      </Form.Item>
-
-{/* intro */}
-      <Form.Item
-        name="intro"
-        label="Intro"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Intro',
-          },
-        ]}
-      >
-        <Input.TextArea showCount maxLength={100} />
-      </Form.Item>
-
-{/* gender */}
-      <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: 'Please select gender!',
-          },
-        ]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-        <Row gutter={8}>
-          <Col span={12}>
-            <Form.Item
-              name="captcha"
-              noStyle
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input the captcha you got!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Button>Get captcha</Button>
-          </Col>
-        </Row>
-      </Form.Item>
-
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('应该接受协议')),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          我已经阅读了 <a href="">协议</a>
-        </Checkbox>
-      </Form.Item>
+        </Form.Item>
 
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          注册
-        </Button>
-      </Form.Item>
+        {/*3.  密码 */}
+        <Form.Item
+          name="password"
+          label="密码"
+          rules={[
+            {
+              required: true,
+              message: '请输入您的密码!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
 
-    </Form>
+
+        {/* 4. 确认密码 */}
+        <Form.Item
+          name="confirm"
+          label="确认密码"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: '请确认您的密码!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('您输入的新密码不匹配!'));
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+
+        {/* 5. 电子邮件 */}
+        <Form.Item
+          name="email"
+          label="电子邮件"
+          rules={[
+            {
+              type: 'email',
+              message: '输入无效的电子邮件!',
+            },
+            {
+              required: true,
+              message: '请输入您的邮箱!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+
+        {/* 6. 手机号码 */}
+        <Form.Item
+          name="phone"
+          label="手机号码"
+          rules={[
+            {
+              required: true,
+              message: '请输入您的电话号码!',
+            },
+          ]}
+        >
+          <Input
+            addonBefore={prefixSelector}
+            style={{
+              width: '100%',
+            }}
+          />
+        </Form.Item>
+
+
+        {/*7.  label=验证码 */}
+        <Form.Item label="验证码" extra="We must make sure that your are a human.">
+          <Row gutter={8}>
+            <Col span={12}>
+              <Form.Item
+                name="captcha"
+                noStyle
+                rules={[
+                  {
+                    required: true,
+                    message: '请输入您的验证码!',
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Button>获取验证码</Button>
+            </Col>
+          </Row>
+        </Form.Item>
+
+        {/* 8.协议 */}
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value ? Promise.resolve() : Promise.reject(new Error('应该接受协议')),
+            },
+          ]}
+          {...tailFormItemLayout}
+        >
+          <Checkbox>
+            我已经阅读了 <a href="">协议</a>
+          </Checkbox>
+        </Form.Item>
+
+
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            注册
+          </Button>
+        </Form.Item>
+
+      </Form>
+    </div>
   );
 };
 export default Signup;
