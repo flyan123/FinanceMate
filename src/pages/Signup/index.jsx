@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import {
   Button,
   Checkbox,
@@ -46,8 +46,9 @@ const tailFormItemLayout = {
 
 
 const Signup = () => {
+
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onSubmit = (values) => {
     console.log('Received values of form: ', values);
   };
   const prefixSelector = (
@@ -63,6 +64,19 @@ const Signup = () => {
     </Form.Item>
   );
 
+// 1.受控组件（1.存取数据状态）
+       function constructor(){
+          super();
+          this.state={
+            nickname:"",
+            password:"",
+            confirm:"",
+            email:"",
+
+          }
+        }
+
+
 
   return (
 
@@ -72,7 +86,7 @@ const Signup = () => {
         {...formItemLayout}
         form={form}
         name="register"
-        onFinish={onFinish}
+        onSubmit={onSubmit}
         initialValues={{
           residence: ['zhejiang', 'hangzhou', 'xihu'],
           prefix: '86',
@@ -83,7 +97,7 @@ const Signup = () => {
         scrollToFirstError
       >
         {/* 1 */}
-        <h1>新用户注册</h1>
+        <h1>管理员注册</h1>
 
         {/* 2. 用户名 */}
         <Form.Item
@@ -163,7 +177,7 @@ const Signup = () => {
 
 
         {/* 6. 手机号码 */}
-        <Form.Item
+        {/* <Form.Item
           name="phone"
           label="手机号码"
           rules={[
@@ -179,11 +193,11 @@ const Signup = () => {
               width: '100%',
             }}
           />
-        </Form.Item>
+        </Form.Item> */}
 
 
         {/*7.  label=验证码 */}
-        <Form.Item label="验证码" extra="We must make sure that your are a human.">
+        {/* <Form.Item label="验证码" extra="We must make sure that your are a human.">
           <Row gutter={8}>
             <Col span={12}>
               <Form.Item
@@ -203,7 +217,8 @@ const Signup = () => {
               <Button>获取验证码</Button>
             </Col>
           </Row>
-        </Form.Item>
+        </Form.Item> */}
+
 
         {/* 8.协议 */}
         <Form.Item
@@ -233,4 +248,5 @@ const Signup = () => {
     </div>
   );
 };
-export default Signup;
+export default  Signup  ;  
+// export default class Signup extends Component;  
