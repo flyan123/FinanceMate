@@ -2,10 +2,8 @@ import React, {  useState } from 'react';
 import {
   Button,
   Checkbox,
-  Col,
   Form,
   Input,
-  Row,
   Select,
 } from 'antd';
 
@@ -48,34 +46,26 @@ const tailFormItemLayout = {
 const Signup = () => {
 
   const [form] = Form.useForm();
-  const onSubmit = (values) => {
-    console.log('Received values of form: ', values);
+  const onFinish = (values) => {
+    console.log('管理员新用户输入的: ', values);
+    // console.log(this.state.nickname);
   };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
 
-// 1.受控组件（1.存取数据状态）
-       function constructor(){
-          super();
-          this.state={
-            nickname:"",
-            password:"",
-            confirm:"",
-            email:"",
+  // 解构 赋值 多个变量
+  const [values, setValues] = useState();  
+  
+  //更新字段  
+  const handleInputChange = (e) => {  
+    const { label, value } = e.target;  
+    setValues(prevValues => ({  
+      ...prevValues,  
+      [label]: value, // 使用计算属性名称来动态更新对应字段的值  
+    }));  
+  };  
 
-          }
-        }
-
+//   const SigLogin=()=>{
+//     console.log("管理员新用户输入的用户名，密码，确认密码，电子邮件分别是；",values)
+// }
 
 
   return (
@@ -86,7 +76,7 @@ const Signup = () => {
         {...formItemLayout}
         form={form}
         name="register"
-        onSubmit={onSubmit}
+        onFinish={onFinish}
         initialValues={{
           residence: ['zhejiang', 'hangzhou', 'xihu'],
           prefix: '86',
@@ -99,10 +89,11 @@ const Signup = () => {
         {/* 1 */}
         <h1>管理员注册</h1>
 
-        {/* 2. 用户名 */}
+        {/* 2. 用户名 nickname */}
         <Form.Item
           name="nickname"
           label="用户名"
+ 
           tooltip="你希望别人怎么称呼你?"
           rules={[
             {
@@ -116,7 +107,7 @@ const Signup = () => {
         </Form.Item>
 
 
-        {/*3.  密码 */}
+        {/*3.  密码 password */}
         <Form.Item
           name="password"
           label="密码"
@@ -132,7 +123,7 @@ const Signup = () => {
         </Form.Item>
 
 
-        {/* 4. 确认密码 */}
+        {/* 4. 确认密码 confirm */}
         <Form.Item
           name="confirm"
           label="确认密码"
@@ -157,10 +148,10 @@ const Signup = () => {
         </Form.Item>
 
 
-        {/* 5. 电子邮件 */}
+        {/* 5. 电子邮件 email */}
         <Form.Item
           name="email"
-          label="电子邮件"
+          label="email"
           rules={[
             {
               type: 'email',
@@ -174,51 +165,6 @@ const Signup = () => {
         >
           <Input />
         </Form.Item>
-
-
-        {/* 6. 手机号码 */}
-        {/* <Form.Item
-          name="phone"
-          label="手机号码"
-          rules={[
-            {
-              required: true,
-              message: '请输入您的电话号码!',
-            },
-          ]}
-        >
-          <Input
-            addonBefore={prefixSelector}
-            style={{
-              width: '100%',
-            }}
-          />
-        </Form.Item> */}
-
-
-        {/*7.  label=验证码 */}
-        {/* <Form.Item label="验证码" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入您的验证码!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>获取验证码</Button>
-            </Col>
-          </Row>
-        </Form.Item> */}
-
 
         {/* 8.协议 */}
         <Form.Item
@@ -239,7 +185,7 @@ const Signup = () => {
 
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" >
             注册
           </Button>
         </Form.Item>
@@ -249,4 +195,3 @@ const Signup = () => {
   );
 };
 export default  Signup  ;  
-// export default class Signup extends Component;  

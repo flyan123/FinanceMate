@@ -73,4 +73,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 1. 路由：npm install --save react-router-dom √
 2. 依赖：npm install --save redux √
 3. npm install --save react-redux √
-3. npm install --save-dev redux-devtools-extension
+3. npm install --save-dev redux-devtools-extension √
+4. 获取数据
+5. 创建服务器 server
+   1. 安装依赖 npm i --save express 
+   2. 服务器运行的端口；
