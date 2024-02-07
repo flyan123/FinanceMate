@@ -78,3 +78,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 5. 创建服务器 server
    1. 安装依赖 npm i --save express 
    2. 服务器运行的端口；
+6. 使用 validator 校验工具
+   参考网址：https://wangchujiang.com/validator.js/#install
+   npm install validator.tool --save
+
+检验是否为空： loadsh
+参考网址：https://www.lodashjs.com/docs/lodash.isEmpty#_isemptyvalue

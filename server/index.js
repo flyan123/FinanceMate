@@ -1,6 +1,12 @@
 const express = require("express");
 const app =express();
 const router = require("./router");
+const bodyparser = require("body-parser")
+
+app.use(bodyparser.urlencoded({
+    extended:true
+}))
+
 
 app.use("./api",router)
 
