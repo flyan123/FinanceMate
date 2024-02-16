@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const validator = require('validator.tool');
+const isEmpty =  ("loadsh/isEmpty");
 
 // 错误，错误信息；不发生错误，true
 const validatorInput = (data) =>{
@@ -19,21 +20,30 @@ const validatorInput = (data) =>{
     if (validator.isEmpty(data.email)){
         errors.email='不符合邮箱格式'
     }
+
+    return{
+        isValid:!isEmpty(errors),
+        errors 
+    }
+    
 }
 
 
 
 
 router.post("/register",(req,res)=>{
-    const nickname = req.body.nickname;
-    const password = req.body.password;
-    const confirm = req.body.confirm;
-    const email = req.body.email;
-
-
-    res.send({
-
-    })
+    const {isValid,errors}=validatorInput(req.body)
+    if(isValid){
+        // 失败
+        res.send(errors)
+    }else{
+        // 成功
+        res.send({
+            msg:"success"
+        })
+  
+    }
+    
 })
 
 

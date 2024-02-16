@@ -70,6 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ### 登入注册依赖
+(https://www.bilibili.com/video/BV1QU4y1B7un?p=3&vd_source=e5bed4ffc0994783be2b4d923b94a0c5)
 1. 路由：npm install --save react-router-dom √
 2. 依赖：npm install --save redux √
 3. npm install --save react-redux √
@@ -80,7 +81,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
    2. 服务器运行的端口；
 6. 使用 validator 校验工具
    参考网址：https://wangchujiang.com/validator.js/#install
-   npm install validator.tool --save
+   npm install validator.tool --save √
+   npm install --save validator √
 
 检验是否为空： loadsh
-参考网址：https://www.lodashjs.com/docs/lodash.isEmpty#_isemptyvalue
+参考网址：https://www.lodashjs.com/docs/lodash.isEmpty#_isemptyvalue 
+   npm install --save loadsh √ P3
+
