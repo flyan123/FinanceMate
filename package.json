@@ -39,6 +39,7 @@
     "jest-watch-typeahead": "^1.0.0",
     "loadsh": "^0.0.4",
     "mini-css-extract-plugin": "^2.4.5",
+    "msw": "^2.2.1",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
